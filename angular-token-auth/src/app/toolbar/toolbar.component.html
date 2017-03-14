@@ -7,10 +7,10 @@
 
       <ul class="right hide-on-med-and-down">
 
-        <li> <a>LOGIN</a></li>
-        <li> <a>REGISTER</a></li>
+        <li> <a (click)="presentAuthDialog()" >LOGIN</a></li>
+        <li> <a (click)="presentAuthDialog('register')">REGISTER</a></li>
 
-        <li> <a >PROFILE</a></li>
+        <li> <a [routerLink]="['/profile']">PROFILE</a></li>
         <li> <a >LOGOUT</a></li>
 
       </ul>
@@ -20,3 +20,5 @@
   </nav>
   
 </div>
+
+<app-auth-dialog #authDialog></app-auth-dialog>

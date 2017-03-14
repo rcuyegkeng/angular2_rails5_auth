@@ -311,4 +311,44 @@ const routes: Routes = [
 
 - n.b. that Angular CLI used the selector app-toolbar for the toolbar component, and app-home for the home component.
 
+### Auth Dialog Component
 
+- Use Angular CLI to create the AuthDialogComponent which will display the login and register forms.
+`ng g c auth-dialog`
+    - n.b. CLI converts the snake case (on command line) to camel case (in source code).
+    - n.b. Rails convention is that classes use Camel case, database names use snake case. Database attributes use snake case. Rails Model names are singular. Rails Database names are plural.
+        + rails snake case uses `_` instead of `-`. (need to verify this)
+
+- edit auth-dialog.component.ts.
+    + see code and blog post.
+    + The Input decorator authMode takes 2 possible values: login or register.
+        * login is the default value.
+        * This allows us to pick the initial form to display when the dialog shows up.
+    + modelActions is an event emitter, required by Materialize Dialog Directive.
+        * We'll emit events on it to open or close our dialog.
+    + openDialog takes mode as it's parameter.
+        * will set the current auth mode and display the dialog.
+            - login is the default value.
+    + isLoginMode and isRegisterMode methods will help us to display the login or register forms conditionally.
+    + _TODO: read up on Input decorator and EventEmitter._
+
+- edit the dialog's template. auth-dialog.component.html.
+    + See code and blog post.
+    + We are using materialize modal directive, and passing modalActions event emitter for it's materializeActions input to be able to control the dialog by emitting events to it.
+    + Right now the dialog is displaying the current mode and allowing us to switch modes.
+
+- edit toolbar.component.html to include the auth-dialog component and create click events on Login and Register actions to open the Auth Dialog.
+    + See code and blog post.
+    + #authDialog is a reference to the AuthDialogComponent of our ToolbarComponent view. It will allow us to access the AuthDialogComponent class from the ToolbarComponent class.
+
+- edit toolbar.component.ts.
+    + See code and blog post.
+    + ViewChild decorator will reference the AuthDialogComponent from our template so we can access it's methods and attributes directly from our ToolbarComponent class.
+    + presentAuthDialog method takes an optional mode parameter (? mark makes it optional).
+    + _TODO: read up on ViewChild decorator._
+
+
+
+
+
+ 

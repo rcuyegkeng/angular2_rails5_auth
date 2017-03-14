@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AuthDialogComponent } from '../auth-dialog/auth-dialog.component';
+
 
 @Component({
   selector: 'app-toolbar',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
+  @ViewChild('authDialog') authDialog: AuthDialogComponent;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  presentAuthDialog(mode?: 'login'| 'register'){
+    this.authDialog.openDialog(mode);
   }
 
 }
