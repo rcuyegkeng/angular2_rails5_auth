@@ -294,3 +294,21 @@ const routes: Routes = [
     pathMatch: 'full'
   },
 ```
+
+### Toolbar Component
+
+- Generate a toolbar component with Angular CLI
+`ng g c toolbar`
+
+- Setup the toolbar's html template.
+    + See code, toolbar.component.html, and blog post!
+
+- Change home.component.html as well
+    + See code and blog post.
+
+- edit app.component.html to display the toolbar.
+    + See code and blog post.
+
+- n.b. that Angular CLI used the selector app-toolbar for the toolbar component, and app-home for the home component.
+
+
