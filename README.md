@@ -347,8 +347,29 @@ const routes: Routes = [
     + presentAuthDialog method takes an optional mode parameter (? mark makes it optional).
     + _TODO: read up on ViewChild decorator._
 
+- We'll use the Token Service to display the correct actions in the toolbar depending on whether or not the user is authenticated.
+    + Use the userSignedIn() method which returns true if the user is logged in.
 
+- Import and inject Angular2TokenService into the ToolbarComponent.
+    + edit toolbar.component.ts.
+    + See code and blog post.
+        * n.b. dependency injection done in parameter list of constructor.
+            - Dependency Injection is a coding pattern where a class receives it's dependencies from external srouces rather than creating them itself.
+            - The dependencies are passed as parameters of the constructor instead of the constructor creating them itself.
+            - This style of coding is less brittle and more flexible.
+                + The constructor doesn't care how the dependencies are instantiated; just that it receives them.
+            - See Angular Documentation for more about Dependency Injection.
 
+- Use the tokenAuthService's userSignedIn() method in the toolbar.component.html to hide/show actions conditionally.  Also attach the signOut method to it's action.
+    + See code and blog post.
+
+### Login and Register Forms
+
+- Use Angular CLI to generate login and register form components.
+```
+ng g c login-form
+ln g c register-form
+```
 
 
  
