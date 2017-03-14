@@ -251,3 +251,46 @@ constructor(private authToken: Angular2TokenService){
 
 ## Part 3. Frontend, login/register
 
+- see [blog post](https://hackernoon.com/angular-2-and-ruby-on-rails-user-authentication-part-3-d938fcb7a334#.ahhwe0fht) for design of front end.
+
+- n.b. Route Guard will check if user is logged in, if not, will redirect to home.
+
+- n.b. TokenAuthService will manage login, register, logout, user profile data, verify token authenticity and check whther the user is logged in or not.
+    + Is this service provided by Angular2TokenService?
+    + or are we building a service on top of Angular2TokenService?
+
+### Home Component and Home Route
+
+- Use Angular CLI to generate the home component.
+`ng g c home`
+    - g is for generate and c is for component.
+    - kinda like rails generators!
+    - Files will be generated and the Home component is added to the app.module.ts declarations.
+
+- create a route for it in src/app/app-routing.module.ts.
+- Import the HomeComponent
+```
+import {HomeComponent} from "./home/home.component";
+```
+- Add home route to the routes array.
+```
+const routes: Routes = [
+  {
+    path: '',
+    children: []
+  },
+  {
+    path: 'home',
+    component: HomeComponent
+  }
+];
+```
+- Make the home route the default route.
+```
+const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent,
+    pathMatch: 'full'
+  },
+```
