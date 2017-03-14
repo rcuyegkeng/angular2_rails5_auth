@@ -249,5 +249,5 @@ constructor(private authToken: Angular2TokenService){
 - n.b. after showing that the signIn works remark out the test.
     + You can tell the test works by looking at the response body and headers in the console.
 
+## Part 3. Frontend, login/register
 
-        * You 
