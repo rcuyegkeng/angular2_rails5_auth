@@ -371,5 +371,36 @@ ng g c login-form
 ln g c register-form
 ```
 
+- edit login form template, login-form.component.html.
+    + See code and blog post.
+    + We're using 2 way binding on the email and password fields.
+        * n.b. 2 way binding means that the values are updated when modified in the HTML form by the user and also updated in the view if they are modified programatically in the component class.
+    + both email and password are required for the form to have a valid state.
+    + submit button is disabled if the form is not valid.
 
- 
+- edit the login form component, login-form.component.ts.
+    + See code and blog post.
+    + onFormResult is an event that is fired when a login request completes.
+        * parent components can listen and act on it.
+    + Token Service is injected into our component. Use it's signIn method when the form is submitted.
+    + When the login action completes we'll emit an event on OnFormResult output when a payload containing the result.  This will notify parent components. (See the subscribe lines).
+
+### Register Form Template
+
+- edit register-form.component.html.
+    + See code and blog.
+    + similar to login form.
+        * Addition is password confirmation field and password validation.
+
+- edit register-form.component.ts.
+    + similar to login form.
+    + register form has an Output event emitter, onFormResult, that fires when register request completes.
+
+### Hooking up the outputs in auth dialog
+
+- edit auth-dialog.component.html.
+    + See code and blog.
+
+- edit auth-dialog.component.ts. Create event handlers for onFormResult events emitted by login and register form components. If the login/register was successful, close the dialog, otherwise display the error returned by our RoR server in an alert window.
+    + See code and blog.
+
