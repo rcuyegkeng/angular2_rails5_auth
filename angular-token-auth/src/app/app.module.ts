@@ -13,6 +13,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
+import { AuthService } from "./services/auth.service";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { RegisterFormComponent } from './register-form/register-form.component';
     AppRoutingModule,
     MaterializeModule
   ],
-  providers: [ Angular2TokenService ],
+  providers: [ Angular2TokenService, AuthService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

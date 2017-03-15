@@ -404,3 +404,57 @@ ln g c register-form
 - edit auth-dialog.component.ts. Create event handlers for onFormResult events emitted by login and register form components. If the login/register was successful, close the dialog, otherwise display the error returned by our RoR server in an alert window.
     + See code and blog.
 
+## Part 4. User Profile, Auth Service and Auth Router Guard
+
+- We'll show user profile info on /profile root and make a guard for it.
+- The guard will redirect to home route, when user is not authenticated.
+- We'll write an Auth Service to wrap all of the auth related stuff in one place.
+
+### Auth Service
+
+- The Authentication service will wrap all of the auth related states and actions in one place.
+    + login / logout
+    + authentication status
+    + it will be asynchronous as a stream.
+
+- create an auth service with Angular CLI
+`ng g s services/auth`
+    + s = service
+
+- Edit auth.service.ts.
+    + See code and blog.
+    + `userSignedIn$` is a RxJs Subject (of type boolean). It is an Observer and Observable at the same time.
+        * We can control it's value in our service, and observe it's changes outside of it.
+        * _The `$` is a convention to specify that this is not a simple variable, but an observable stream of data which changes in time._
+        * constructor initializes the value.
+    + logOutUser() takes no params and returns an Observable of Response. Use map to set the userSignedIn$ to false so that observers are notifed that the user has logged out. Then return the response to whoever is observing the result of logOutUser().
+    + logInUser() method takes an object with email and password keys and users it to sign in from Angular2TokenService signIn() method. Use map to set userSignedIn$ to true to notify observers that user logged in and then return response.
+    + registerUser() is like logInUser() but has an additional passwordConfirmation attribute.
+
+- Inject the service into our main AppModule's providers in app.module.ts.
+    + See code and blog.
+    ```
+    import {AuthService} from "./services/auth.service";
+    ```
+    ```
+    ],
+    providers: [ Angular2TokenService, AuthService],
+    bootstrap: [AppComponent]
+    ```
+
+### Refactor Login and Toolbar components to use AuthService.
+
+#### Refactor the toolbar.
+
+- See code and blog.
+- Use AuthService's userSignedIn$ Subject to change the state of the toolbar when a user logs in or out.
+    + Since userSignedIn$ is a asynchronous stream of values changing over time we need to use Angular's async pipe to listen to it's changes.
+    ` | async`
+- Link the click event on logout button to toolbar component's logOut() method.
+
+#### Refactor the Login form
+
+- edit login-form.component.ts.
+    + See code and blog
+
+ 
