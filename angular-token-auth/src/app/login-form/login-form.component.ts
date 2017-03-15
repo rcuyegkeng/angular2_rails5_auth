@@ -25,12 +25,14 @@ export class LoginFormComponent implements OnInit {
 
         res => {
           if(res.status == 200){
+            // loginForm.resetForm();
             this.onFormResult.emit({signedIn: true, res});
           }
         },
 
         err => {
           console.log('err:', err);
+          // loginForm.resetForm();
           this.onFormResult.emit({signedIn: false, err});
         }
     )

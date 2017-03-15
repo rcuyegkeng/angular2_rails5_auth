@@ -28,6 +28,7 @@ export class RegisterFormComponent implements OnInit {
         (res) => {
 
           if (res.status == 200){
+            // registerForm.resetForm();
             this.onFormResult.emit({signedUp: true, res})
           }
 

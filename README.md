@@ -456,5 +456,78 @@ ln g c register-form
 
 - edit login-form.component.ts.
     + See code and blog
+- Replace Angular2TokenService with AuthService.
+- Use methods in AuthService.
 
- 
+#### Refactor Register Form Component.
+
+- similar to changes to login-form.component.ts.
+- edit register-form.component.ts.
+
+### User Profile page
+
+- Generate the ProfileComponent with Angular CLI
+`ng g c profile`
+    - This generates files and updates AppModule's declarations.
+
+#### Profile route
+
+- edit app-routing.module.ts to declare a profile route.
+- Import the component
+`import {ProfileComponent} from "./profile/profile.component";`
+- Declare the route
+```
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
+  }
+```
+
+#### UI
+
+- We'll display the user's email, name and user name in a Materialize Card and use it's footer to add a logout button.
+
+- edit profile.component.ts.
+    + See code and blog.
+
+- We'll use Angular2TokenService to display the user's personal information.
+- AuthService to implement the logout action
+- Router to redirect after logout completes.
+
+- Edit the profile.component.html.
+    + See code and blog.
+- Angular2TokenService's currentUserData attribute provides information about our user if he is logged in.
+    + undefined if not logged in.
+    + use `*ngIf` to see if there is data to display.
+
+- add .clearfix to profile.component.sass because Materialize does not implement it.
+```
+.clearfix
+  overflow: auto
+```
+
+### Route Guard
+
+- Problem is we can navigate to /profile if we are not logged in.
+- Route Guard is a class which implements CanActivate interface.
+- The CanActivate implementation returns a boolean or an Observable of type boolean.
+- depending on that boolean value the router will allow or forbid the activation of the route.
+
+- Create an AuthGuard class in src/app/guards/auth.guard.ts
+    + no cli command for this?
+    + See code and blog.
+- Inject the AuthGuard into the AppModule providers
+    + See code and blog.
+- edit app-routing.module.ts. Set the profile's route guard
+```
+import {AuthGuard} from "./guards/auth.guard";
+...
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
+  }
+```
+- The CanActivate key takes an array of guards. All of them must return true for the route to be activated.
+
