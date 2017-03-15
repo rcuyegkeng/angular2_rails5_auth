@@ -68,7 +68,7 @@ end
 - n.b. In the response the access-token is in the Headers.
     + The body contains the user record.
 
-## Part2: Angular 2 Frontend
+## Part 2: Angular 2 Frontend
 
 ### Bootstrap and Configure project.
 
